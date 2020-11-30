@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { StateProvider } from "./models/store.js";
+import Main from "./components/Main";
+//import Game from "./components/Game";
+
+import "./App.css";
+
+import { useMachine } from "@xstate/react";
+import flowMachine from "./models/stateMachine";
+import { MachineProvider } from "./models/MachineProvider";
+import Debugger from "./Debugger.js";
 
 function App() {
+  const machineInstance = useMachine(flowMachine, {devTools:true});
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <StateProvider>
+        <MachineProvider machineInstance={machineInstance}>
+          <Debugger />
+          <Main />
+        </MachineProvider>
+      </StateProvider>
     </div>
   );
 }
