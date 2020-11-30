@@ -1,12 +1,2 @@
 [build]
   functions = "lambdas"
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/lambdas/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

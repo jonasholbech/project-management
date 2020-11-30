@@ -4,7 +4,7 @@ import { store } from "./models/store.js";
 
 export default function Debugger(props) {
   const [state, send] = useContext(MachineContext);
-  const { globalState, dispatch } = useContext(store);
+  const { globalState } = useContext(store);
   console.log(state,globalState)
   return (
     <div>
