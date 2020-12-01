@@ -2,10 +2,12 @@ import React, {  useContext, useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 //import { MachineContext } from "../models/MachineProvider";
 import { store } from "../models/store.js";
-
+import netlifyIdentity from 'netlify-identity-widget';
 export default function Overview(props){
     const { globalState } = useContext(store);
     //const [state,send] = useContext(MachineContext);
+    const user = netlifyIdentity.currentUser();
+    console.log(user)
     function pad(num){
         return String(num).padStart(2,'0');
     }

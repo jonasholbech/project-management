@@ -11,7 +11,8 @@ const Main = () => {
   
   
   return (<main>
-      {state.matches("fetchInitialData") && <Loader />}
+    <h1>Main</h1>
+      {state.matches("idle") && <Loader />}
       {state.matches("overview") && <Overview />}
       
   </main>);

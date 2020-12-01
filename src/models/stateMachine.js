@@ -3,18 +3,12 @@ import { Machine } from "xstate";
 const flowMachine = Machine(
   {
     id: "PM",
+    strict:true,
     initial: "idle",
     states: {
       idle: {
         on: {
-          LOGGED_IN:"fetchInitialData",
-          LOGGED_OUT:"loggedOut",
-        }
-      },
-      fetchInitialData: {
-        on: {
-          SUCCESS:"overview",
-          ERROR:{}
+          OVERVIEW:"overview"
         }
       },
       loggedOut:{

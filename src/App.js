@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { StateProvider } from "./models/store.js";
 import Main from "./components/Main";
 
@@ -20,28 +20,36 @@ import Debugger from "./Debugger.js";
 
 function App() {
   const machineInstance = useMachine(flowMachine, {devTools:true});
+  useEffect(()=>{
+    console.log(
+      Boolean(netlifyIdentity.currentUser())
+    )
+    },[])
   return (
     <div className="App">
       <StateProvider>
         <MachineProvider machineInstance={machineInstance}>
           <Debugger />
           <Router>
-      <div>
-        <AuthButton />
-        <ul>
-          <li>
-            <Link to="/public">Public Page</Link>
-          </li>
-          <li>
-            <Link to="/protected">Protected Page</Link>
-          </li>
-        </ul>
-        <Route path="/public" component={Public} />
-        <Route path="/login" component={Login} />
-        <PrivateRoute path="/protected" component={Protected} />
-      </div>
-    </Router>
-          <Main />
+            <div>
+              <AuthButton />
+              <ul>
+                <li>
+                  <Link to="/public">Public Page</Link>
+                </li>
+                <li>
+                  <Link to="/protected">Protected</Link>
+                </li>
+                <li>
+                  <Link to="/overview">Overview</Link>
+                </li>
+              </ul>
+              <Route path="/public" component={Public} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute path="/protected" component={Protected} />
+              <PrivateRoute path="/overview" component={Main} />
+            </div>
+          </Router>          
         </MachineProvider>
       </StateProvider>
     </div>
@@ -62,13 +70,14 @@ function Protected() {
 }
 
 const netlifyAuth = {
-  isAuthenticated: false,
+  isAuthenticated: Boolean(netlifyIdentity.currentUser()),
   user: null,
   authenticate(callback) {
     this.isAuthenticated = true;
     netlifyIdentity.open();
     netlifyIdentity.on('login', user => {
       this.user = user;
+      
       callback(user);
     });
   },
@@ -84,7 +93,7 @@ const netlifyAuth = {
 
 const AuthButton = withRouter(
   ({ history }) =>
-    netlifyAuth.isAuthenticated ? (
+  Boolean(netlifyIdentity.currentUser()) ? (
       <p>
         Welcome!{' '}
         <button
@@ -105,7 +114,7 @@ function PrivateRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={props =>
-        netlifyAuth.isAuthenticated ? (
+        Boolean(netlifyIdentity.currentUser()) ? (
           <Component {...props} />
         ) : (
           <Redirect
