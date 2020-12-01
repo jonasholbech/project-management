@@ -2,7 +2,7 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  personel: [
+  tasks: [
   ],
 };
 const store = createContext(initialState);
@@ -11,7 +11,7 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   const [globalState, dispatch] = useReducer((state = initialState, action) => {
     if(action.type==="SET_INITIAL_DATA"){
-      return { ...state, personel: action.payload.personel };
+      return { ...state, tasks: action.payload };
     }
     /* if (action.type === "SET_LANDS") {
       return { ...state, lands: action.payload };

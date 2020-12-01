@@ -5,7 +5,8 @@ import { store } from "./models/store.js";
 export default function Debugger(props) {
   const [state, send] = useContext(MachineContext);
   const { globalState } = useContext(store);
-  console.log(state,globalState)
+  console.log(state)
+  console.log(globalState)
   return (
     <div>
       <h2>currently on: {state.value}</h2>

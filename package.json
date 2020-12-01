@@ -11,6 +11,7 @@
     "mongodb": "^3.6.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4",
     "xstate": "^4.14.1"
@@ -20,8 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "local-start":"netlify dev",
-    "help":"echo 'lsof -i tcp:3000 && kill -9 PID'"
+    "local-start": "netlify dev",
+    "help": "echo 'lsof -i tcp:3000 && kill -9 PID'"
   },
   "eslintConfig": {
     "extends": [

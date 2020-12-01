@@ -7,14 +7,18 @@ const flowMachine = Machine(
     states: {
       idle: {
         on: {
-          FETCH: 'fetchIt'
+          LOGGED_IN:"fetchInitialData",
+          LOGGED_OUT:"loggedOut",
         }
       },
-      fetchIt: {
+      fetchInitialData: {
         on: {
           SUCCESS:"overview",
           ERROR:{}
         }
+      },
+      loggedOut:{
+        on:{}
       },
       overview: {
         on: {}
