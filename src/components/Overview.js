@@ -1,11 +1,11 @@
-import React, {  useContext, useEffect, useState } from "react";
+import React, {  useContext, useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MachineContext } from "../models/MachineProvider";
+//import { MachineContext } from "../models/MachineProvider";
 import { store } from "../models/store.js";
 
 export default function Overview(props){
-    const { globalState, dispatch } = useContext(store);
-    const [state,send] = useContext(MachineContext);
+    const { globalState } = useContext(store);
+    //const [state,send] = useContext(MachineContext);
     function pad(num){
         return String(num).padStart(2,'0');
     }

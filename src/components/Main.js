@@ -1,12 +1,12 @@
-import React, {  useContext, useEffect } from "react";
+import React, {  useContext } from "react";
 import { MachineContext } from "../models/MachineProvider";
-import { store } from "../models/store.js";
+//import { store } from "../models/store.js";
 
 import Loader from "./Loader";
 import Overview from "./Overview";
 
 const Main = () => {
-  const { globalState, dispatch } = useContext(store);
+  //const { globalState, dispatch } = useContext(store);
   const [state] = useContext(MachineContext);
   
   
