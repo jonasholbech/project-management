@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@xstate/react": "^1.0.3",
     "dotenv": "^8.2.0",
+    "faker": "^5.1.0",
     "mongodb": "^3.6.3",
     "netlify-identity-widget": "^1.9.1",
     "react": "^17.0.1",

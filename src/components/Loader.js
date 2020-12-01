@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { MachineContext } from "../models/MachineProvider";
 import { store } from "../models/store.js";
-import {getAllTasks} from "../utils/getAllTasks";
+import {getAllTasks} from "../utils/tasks";
 
 const Loader = () => {
   const { dispatch } = useContext(store);

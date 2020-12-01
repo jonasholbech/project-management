@@ -13,6 +13,10 @@ const StateProvider = ({ children }) => {
     if(action.type==="SET_INITIAL_DATA"){
       return { ...state, tasks: action.payload };
     }
+    if(action.type === "TASK_DELETED"){
+      const nextTasks = state.tasks.filter(t=>t._id!==action.payload);
+      return { ...state, tasks: nextTasks };
+    }
     /* if (action.type === "SET_LANDS") {
       return { ...state, lands: action.payload };
     }

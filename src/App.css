@@ -1,3 +1,9 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
 table {
   border: none;
   border-collapse: collapse;
@@ -38,4 +44,38 @@ td.actions svg {
 td.actions svg:hover {
   cursor: pointer;
   fill: black;
+}
+.SecondaryOptions {
+  position: relative;
+}
+.SecondaryOptions * {
+  margin: 0;
+  padding: 0;
+}
+.SecondaryOptions .inner {
+  border: 1px solid rgb(242, 241, 241);
+  position: absolute;
+  border-radius: 2px;
+  border-radius: 10px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+.inner button {
+  all: unset;
+  padding: 8px;
+  background: white;
+  border-bottom: 1px solid rgb(242, 241, 241);
+}
+.inner button:last-child {
+  border-bottom: none;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #f5f8fc;
+}
+button:active {
+  background: hotpink;
 }
