@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { StateProvider } from "./models/store.js";
 import Main from "./components/Main";
+import Task from "./components/Task";
 
 import netlifyIdentity from 'netlify-identity-widget';
 import {
@@ -48,6 +49,7 @@ function App() {
               <Route path="/login" component={Login} />
               <PrivateRoute path="/protected" component={Protected} />
               <PrivateRoute path="/overview" component={Main} />
+              <PrivateRoute path="/overview/:id" component={Task} />
             </div>
           </Router>          
         </MachineProvider>

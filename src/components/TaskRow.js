@@ -15,7 +15,7 @@ export default function TaskRow(props){
             <td>{props.description}</td>
             <td>{due}</td>
             <td className="progress"><Completion assigned={props.assigned}/></td>
-            <td className="actions"><SecondaryOptions _id={props._id}/>
+            <td className="actions"><SecondaryOptions assigned={props.assigned} _id={props._id}/>
             </td>
         </tr>)
 }

@@ -15,6 +15,11 @@ const flowMachine = Machine(
         on:{}
       },
       overview: {
+        on: {
+          TASKVIEW:"task"
+        }
+      },
+      task: {
         on: {}
       }
       /* success: {
