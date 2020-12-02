@@ -19,6 +19,15 @@ td,
 th {
   padding: 15px;
 }
+td.start {
+  text-align: start;
+}
+td.center {
+  text-align: center;
+}
+td.end {
+  text-align: end;
+}
 tr:hover {
   background-color: #f5f8fc;
 }
@@ -78,5 +87,10 @@ button:hover {
   background-color: #f5f8fc;
 }
 button:active {
-  background: hotpink;
+  background: lightblue;
+}
+
+.AssigneeForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

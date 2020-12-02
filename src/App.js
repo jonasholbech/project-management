@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
 import { StateProvider } from "./models/store.js";
-import Main from "./components/Main";
+import Overview from "./components/Overview";
 import Task from "./components/Task";
+import Loader from "./components/Loader";
 
 import netlifyIdentity from 'netlify-identity-widget';
 import {
@@ -14,13 +15,7 @@ import {
 
 import "./App.css";
 
-import { useMachine } from "@xstate/react";
-import flowMachine from "./models/stateMachine";
-import { MachineProvider } from "./models/MachineProvider";
-import Debugger from "./Debugger.js";
-
 function App() {
-  const machineInstance = useMachine(flowMachine, {devTools:true});
   useEffect(()=>{
     console.log(
       Boolean(netlifyIdentity.currentUser())
@@ -29,8 +24,6 @@ function App() {
   return (
     <div className="App">
       <StateProvider>
-        <MachineProvider machineInstance={machineInstance}>
-          <Debugger />
           <Router>
             <div>
               <AuthButton />
@@ -48,11 +41,10 @@ function App() {
               <Route path="/public" component={Public} />
               <Route path="/login" component={Login} />
               <PrivateRoute path="/protected" component={Protected} />
-              <PrivateRoute path="/overview" component={Main} />
+              <PrivateRoute exact path="/overview" component={Overview} />
               <PrivateRoute path="/overview/:id" component={Task} />
             </div>
           </Router>          
-        </MachineProvider>
       </StateProvider>
     </div>
   );
@@ -117,7 +109,9 @@ function PrivateRoute({ component: Component, ...rest }) {
       {...rest}
       render={props =>
         Boolean(netlifyIdentity.currentUser()) ? (
-          <Component {...props} />
+          <Loader>
+            <Component {...props} />
+          </Loader>
         ) : (
           <Redirect
             to={{

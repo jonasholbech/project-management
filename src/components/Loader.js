@@ -1,14 +1,14 @@
 import React, { useEffect, useContext } from "react";
-import { MachineContext } from "../models/MachineProvider";
+
 import { store } from "../models/store.js";
 import {getAllTasks} from "../utils/tasks";
 
-const Loader = () => {
-  const { dispatch } = useContext(store);
-  const [, send] = useContext(MachineContext);
+const Loader = (props) => {
+  const { globalState, dispatch } = useContext(store);
+  
   useEffect(()=>{
-    getAllTasks(dispatch, send)
-  },[dispatch,send])
-  return <p>Loading...</p>;
+    getAllTasks(dispatch)
+  },[dispatch])
+  return !globalState.loaded ? <p>Loading...</p>:props.children;
 };
 export default Loader;

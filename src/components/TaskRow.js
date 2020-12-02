@@ -1,5 +1,7 @@
 import Completion from "./Completion";
 import SecondaryOptions from "./SecondaryOptions";
+import {Link} from 'react-router-dom';
+
 export default function TaskRow(props){
     function pad(num){
         return String(num).padStart(2,'0');
@@ -10,12 +12,13 @@ export default function TaskRow(props){
     due = `${pad(due.getDate())}/${pad(due.getMonth())} ${pad(due.getHours())}:${pad(due.getMinutes())}`
     return (
         <tr>
-            <td>{props.title}</td>
+            <td><Link to={`/overview/${props._id}`}>{props.title}</Link></td>
             <td>{added}</td>
             <td>{props.description}</td>
             <td>{due}</td>
             <td className="progress"><Completion assigned={props.assigned}/></td>
             <td className="actions"><SecondaryOptions assigned={props.assigned} _id={props._id}/>
             </td>
-        </tr>)
+        </tr>
+    )
 }

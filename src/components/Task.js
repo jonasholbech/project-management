@@ -1,17 +1,18 @@
 import {useContext} from "react";
-import { MachineContext } from "../models/MachineProvider";
 import { store } from "../models/store.js";
 import netlifyIdentity from 'netlify-identity-widget';
-
 import persons from "../utils/persons";
+
 export default function Task(props){
     const { globalState } = useContext(store);
-    const [state,send] = useContext(MachineContext);
     const user = netlifyIdentity.currentUser();
 
     const thisId = props.match.params.id;
     const thisTask = globalState.tasks.find(el=>el._id===thisId);
-return <h1>Task: {thisTask.title}</h1>
+    return <div className="Task">
+        <h1>Task: {thisTask.title}</h1>
+        <AssigneeForm {...thisTask}/>
+    </div>
 }
 
 
@@ -53,8 +54,8 @@ function AssigneeForm({assigned}){
                 return (
                     <tr key={person.initials}>
                         <td>{person.name}</td>
-                        <td><input type="radio" name={person.initials} defaultChecked={completed} /></td>
-                        <td><input type="radio" name={person.initials} defaultChecked={notCompleted}/></td>
+                        <td className="center"><input type="radio" name={person.initials} defaultChecked={completed} /></td>
+                        <td className="center"><input type="radio" name={person.initials} defaultChecked={notCompleted}/></td>
                     </tr>
                 )
             })}
@@ -74,7 +75,7 @@ function AssigneeForm({assigned}){
                 return (
                     <tr key={person.initials}>
                         <td>{person.name}</td>
-                        <td><input type="checkbox" /></td>
+                        <td className="center"><input type="checkbox" /></td>
                     </tr>
                 )
             })}

@@ -4,6 +4,7 @@ import React, { createContext, useReducer } from "react";
 const initialState = {
   tasks: [
   ],
+  loaded:false
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -11,7 +12,7 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   const [globalState, dispatch] = useReducer((state = initialState, action) => {
     if(action.type==="SET_INITIAL_DATA"){
-      return { ...state, tasks: action.payload };
+      return { ...state, tasks: action.payload, loaded:true };
     }
     if(action.type === "TASK_DELETED"){
       const nextTasks = state.tasks.filter(t=>t._id!==action.payload);
