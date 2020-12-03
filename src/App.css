@@ -90,7 +90,25 @@ button:active {
   background: lightblue;
 }
 
-.AssigneeForm {
+main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 800px 1fr;
+}
+main > * {
+  grid-column: 2/-2;
+}
+
+.AssigneeForm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.AssigneeForm button:hover {
+  cursor: pointer;
+}
+.AssigneeForm button:hover svg {
+  fill: crimson;
+}
+.AssigneeForm button {
+  all: unset;
 }

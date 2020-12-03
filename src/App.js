@@ -25,25 +25,19 @@ function App() {
     <div className="App">
       <StateProvider>
           <Router>
-            <div>
+            <nav>
               <AuthButton />
-              <ul>
-                <li>
-                  <Link to="/public">Public Page</Link>
-                </li>
-                <li>
-                  <Link to="/protected">Protected</Link>
-                </li>
-                <li>
-                  <Link to="/overview">Overview</Link>
-                </li>
-              </ul>
+              <Link to="/public">Public Page</Link>
+              <Link to="/protected">Protected</Link>
+              <Link to="/overview">Overview</Link>
+            </nav>
+            <main>
               <Route path="/public" component={Public} />
               <Route path="/login" component={Login} />
               <PrivateRoute path="/protected" component={Protected} />
               <PrivateRoute exact path="/overview" component={Overview} />
               <PrivateRoute path="/overview/:id" component={Task} />
-            </div>
+            </main>
           </Router>          
       </StateProvider>
     </div>

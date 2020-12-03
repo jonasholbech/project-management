@@ -18,6 +18,24 @@ const StateProvider = ({ children }) => {
       const nextTasks = state.tasks.filter(t=>t._id!==action.payload);
       return { ...state, tasks: nextTasks };
     }
+    if(action.type === "ASSIGN_TO_TASK"){
+      const nextTasks = state.tasks.map(task=>{
+        if(task._id===action.payload.task){
+          task.assigned=task.assigned.concat({...action.payload.person, completed:false})
+        }
+        return task;
+      })
+      return { ...state, tasks: nextTasks };
+    }
+    if(action.type==="UNASSIGN_FROM_TASK"){
+      const nextTasks = state.tasks.map(task=>{
+        if(task._id===action.payload.task){
+          task.assigned = [...task.assigned].filter(person=>person.initials!==action.payload.person.initials);
+        }
+        return task;
+      })
+      return { ...state, tasks: nextTasks };
+    }
     /* if (action.type === "SET_LANDS") {
       return { ...state, lands: action.payload };
     }
