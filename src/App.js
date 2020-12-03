@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import { Button } from 'rsuite';
 import { StateProvider } from "./models/store.js";
 import Overview from "./components/Overview";
 import Task from "./components/Task";
@@ -12,7 +13,7 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom';
-
+import 'rsuite/dist/styles/rsuite-default.css';
 import "./App.css";
 
 function App() {
@@ -83,13 +84,13 @@ const AuthButton = withRouter(
   ({ history }) =>
   Boolean(netlifyIdentity.currentUser()) ? (
       
-        <button
+        <Button appearance="subtle"
           onClick={() => {
             netlifyAuth.signout(() => history.push('/'));
           }}
         >
           Sign out
-        </button>
+        </Button>
     ) : (
       <p>You are not logged in.</p>
     )
@@ -135,7 +136,7 @@ class Login extends React.Component {
     return (
       <div>
         <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
+        <Button appearance="primary" onClick={this.login}>Log in</Button>
       </div>
     );
   }

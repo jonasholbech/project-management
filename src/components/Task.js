@@ -13,7 +13,8 @@ export default function Task(props){
     const thisId = props.match.params.id;
     const thisTask = globalState.tasks.find(el=>el._id===thisId);
     return <div className="Task">
-        <h1>Task: {thisTask.title}</h1>
+        <p className="titleLabel">Task</p>
+        <h1>{thisTask.title}</h1>
         <section>{thisTask.description}</section>
         <AssigneeForm {...thisTask}/>
     </div>

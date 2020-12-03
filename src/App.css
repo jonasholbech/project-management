@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+nav > * {
+  margin: 0;
+  padding: 6px;
+}
 table {
   border: none;
   border-collapse: collapse;
@@ -111,4 +120,9 @@ main > * {
 }
 .AssigneeForm button {
   all: unset;
+}
+
+.titleLabel {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
 }
