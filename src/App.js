@@ -82,8 +82,7 @@ const netlifyAuth = {
 const AuthButton = withRouter(
   ({ history }) =>
   Boolean(netlifyIdentity.currentUser()) ? (
-      <p>
-        Welcome!{' '}
+      
         <button
           onClick={() => {
             netlifyAuth.signout(() => history.push('/'));
@@ -91,7 +90,6 @@ const AuthButton = withRouter(
         >
           Sign out
         </button>
-      </p>
     ) : (
       <p>You are not logged in.</p>
     )
