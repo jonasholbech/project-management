@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import { store } from "../models/store.js";
-import netlifyIdentity from 'netlify-identity-widget';
+//import netlifyIdentity from 'netlify-identity-widget';
 import persons from "../utils/persons";
 import {assignToTask,unassignFromTask} from "../utils/tasks";
 import { BiTrash } from "react-icons/bi";
@@ -8,7 +8,7 @@ import { BiTrash } from "react-icons/bi";
 
 export default function Task(props){
     const { globalState } = useContext(store);
-    const user = netlifyIdentity.currentUser();
+    //const user = netlifyIdentity.currentUser();
 
     const thisId = props.match.params.id;
     const thisTask = globalState.tasks.find(el=>el._id===thisId);
