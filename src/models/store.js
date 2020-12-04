@@ -41,6 +41,20 @@ const StateProvider = ({ children }) => {
     if(action.type==="ADD_TASK"){
       return {...state, tasks:state.tasks.concat(action.payload)}
     }
+    if(action.type==="TOGGLE_COMPLETED"){
+      const nextTasks = state.tasks.map(task=>{
+        if(task._id===action.payload.task){
+          task.assigned = action.assigned.map(assignment=>{
+            if(assignment.initials===action.payload.person.initials){
+              assignment.completed=action.payload.completed
+            }
+            return assignment
+          })
+        }
+        return task;
+      })
+      return { ...state, tasks: nextTasks };
+    }
     /* if (action.type === "SET_LANDS") {
       return { ...state, lands: action.payload };
     }

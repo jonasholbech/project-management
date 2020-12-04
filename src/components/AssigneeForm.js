@@ -66,7 +66,11 @@ export default function AssigneeForm({assigned, _id}){
         toggleCompleted(payload, (data,person)=>{
             Alert.success(`${person.name} ${payload.completed ? "completed":"un-completed"} the task`, alertDelay)
         })
-        //TODO: dispatch?
+        dispatch({
+            type:"TOGGLE_COMPLETED",
+            payload
+        })
+        
     }
     return (
         <form className="AssigneeForm">

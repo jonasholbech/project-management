@@ -131,3 +131,6 @@ label,
 textarea {
   display: block;
 }
+label {
+  margin-bottom: 1rem;
+}

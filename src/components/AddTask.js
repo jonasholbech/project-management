@@ -31,13 +31,13 @@ export default function AddTask(props){
         <h2>Add Task</h2>
         <form onSubmit={submit}>
             <label>Task
-                <input type="text" required name="title" />
+                <input className="rs-input" type="text" required name="title" />
             </label>
             <label>Due Date
-                <input type="date" required name="dueAt" />
+                <input className="rs-input" type="date" required name="dueAt" />
             </label>
             <label>Description
-                <textarea name="description"></textarea>
+                <textarea className="rs-input" name="description"></textarea>
             </label>
             <ButtonToolbar>
                 <Button appearance="primary" type="submit">Submit</Button>
