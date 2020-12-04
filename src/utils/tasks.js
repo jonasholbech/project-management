@@ -23,20 +23,31 @@ const deleteTask = async(_id,dispatch)   => {
   }
 }
 
-const assignToTask = async(payload) => {
+const assignToTask = async(payload, callback) => {
   const response = await fetch("/api/assign-to-task", {
     method:"post",
     body: JSON.stringify({_id:payload.task,assignee:payload.person})
   });
-  await response.json();
+  const data = await response.json();
+  callback(data, payload.person)
 }
 
-const unassignFromTask = async(payload) => {
+const unassignFromTask = async(payload,callback) => {
   const response = await fetch("/api/unassign-from-task", {
     method:"post",
     body: JSON.stringify({_id:payload.task,assignee:payload.person})
   });
-  await response.json();
+  const data = await response.json();
+  callback(data, payload.person)
 }
 
-export {getAllTasks, deleteTask,assignToTask, unassignFromTask};  
+const toggleCompleted = async(payload, callback) => {
+  const response = await fetch("/api/toggle-completed", {
+    method:"post",
+    body: JSON.stringify(payload)
+  });
+  const data = await response.json();
+  callback(data, payload.person)
+}
+
+export {getAllTasks, deleteTask,assignToTask, unassignFromTask, toggleCompleted};  

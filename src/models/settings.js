@@ -1,4 +1,2 @@
-const settings = {
-  godMode: false
-};
-export default settings;
+export {persons} from "./persons";
+export const alertDelay=2000;

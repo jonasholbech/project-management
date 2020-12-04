@@ -14,4 +14,4 @@ const persons = [
     {name:"Jens", initials:"jec"},
     {name:"Ida", initials:"idwh"},
 ];
-export default persons;
+export {persons};
