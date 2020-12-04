@@ -38,6 +38,7 @@ function App() {
               <Link to="/public">Public Page</Link>
               <Link to="/protected">Protected</Link>
               <Link to="/overview">Overview</Link>
+              <Link to="/add-task">Add Task</Link>
             </nav>
             <main>
               <Switch>
