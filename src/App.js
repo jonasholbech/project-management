@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Button } from 'rsuite';
 import { StateProvider } from "./models/store.js";
 //import Overview from "./components/Overview";
@@ -21,8 +21,10 @@ import "./App.css";
 const Overview = React.lazy(()=>import("./components/Overview"));
 const Task = React.lazy(()=>import("./components/Task"));
 const AddTask = React.lazy(()=>import("./components/AddTask"));
+const Settings = React.lazy(()=>import("./components/Settings"));
 
 function App() {
+  const [showSettings, setShowSettings] = useState(false);
   useEffect(()=>{
     console.log(
       Boolean(netlifyIdentity.currentUser())
@@ -31,7 +33,9 @@ function App() {
   return (
     <div className="App">
       <StateProvider>
+      
         <React.Suspense fallback={<span>Waiting</span>}>
+          <Settings show={showSettings} setShowSettings={setShowSettings}/>
           <Router>
             <nav>
               <AuthButton />
@@ -39,6 +43,7 @@ function App() {
               <Link to="/protected">Protected</Link>
               <Link to="/overview">Overview</Link>
               <Link to="/add-task">Add Task</Link>
+              <Button appearance="link" onClick={()=>setShowSettings(!showSettings)}>Settings</Button>
             </nav>
             <main>
               <Switch>

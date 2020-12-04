@@ -134,3 +134,8 @@ textarea {
 label {
   margin-bottom: 1rem;
 }
+.Settings .setting {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
