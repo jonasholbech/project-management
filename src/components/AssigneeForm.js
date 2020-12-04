@@ -20,8 +20,10 @@ function filterPersons(persons, assigned){
     return [assignedPersons, notAssignedPersons];
 }
 export default function AssigneeForm({assigned, _id}){
-    const { dispatch } = useContext(store);
-    
+    const { globalState,dispatch } = useContext(store);
+    console.groupCollapsed("state and user");
+    console.log({globalState});
+    console.groupEnd();
     const [assignedPersons, notAssignedPersons] = filterPersons(persons, assigned);
     const deleteClicked= async(e, person)=>{
         e.preventDefault();
@@ -37,20 +39,23 @@ export default function AssigneeForm({assigned, _id}){
             payload
         })
     }
+
     const assignToTaskClicked = async(person)=>{
-            const payload = {
-                task:_id,
-                person:person
-            }
-            assignToTask(payload, (data,person)=>{
-                console.log(data);
-                Alert.success(`${person.name} was assigned to the task`, alertDelay)
-            })
-            dispatch({
-                type:"ASSIGN_TO_TASK",
-                payload
-            })
+        console.log("assignToTaskClicked")
+        person.completed=false;
+        const payload = {
+            task:_id,
+            person:person
+        }
+        assignToTask(payload, (data,person)=>{
+            Alert.success(`${person.name} was assigned to the task`, alertDelay)
+        })
+        dispatch({
+            type:"ASSIGN_TO_TASK",
+            payload
+        });
     }
+
     const setCompleted = async(e,person)=>{
         const payload = {
             completed:e.target.value==="true",
@@ -61,6 +66,7 @@ export default function AssigneeForm({assigned, _id}){
         toggleCompleted(payload, (data,person)=>{
             Alert.success(`${person.name} ${payload.completed ? "completed":"un-completed"} the task`, alertDelay)
         })
+        //TODO: dispatch?
     }
     return (
         <form className="AssigneeForm">
@@ -109,7 +115,7 @@ export default function AssigneeForm({assigned, _id}){
                 return (
                     <tr key={person.initials}>
                         <td>{person.name}</td>
-                        <td className="center"><input onChange={()=>assignToTaskClicked(person)} name="assigned" value={person.initials} type="checkbox" /></td>
+                        <td className="center"><input onClick={()=>assignToTaskClicked(person)} name="assigned" value={person.initials} type="checkbox" /></td>
                     </tr>
                 )
             })}

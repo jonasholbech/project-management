@@ -19,8 +19,10 @@ const StateProvider = ({ children }) => {
       return { ...state, tasks: nextTasks };
     }
     if(action.type === "ASSIGN_TO_TASK"){
+      console.log("ASSIGN_TO_TASK", action.payload)
       const nextTasks = state.tasks.map(task=>{
         if(task._id===action.payload.task){
+          console.log("FOUND _ID")
           task.assigned=task.assigned.concat({...action.payload.person, completed:false})
         }
         return task;

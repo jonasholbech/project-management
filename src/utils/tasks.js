@@ -24,11 +24,13 @@ const deleteTask = async(_id,dispatch)   => {
 }
 
 const assignToTask = async(payload, callback) => {
+  console.log("async assignToTask");
   const response = await fetch("/api/assign-to-task", {
     method:"post",
     body: JSON.stringify({_id:payload.task,assignee:payload.person})
   });
   const data = await response.json();
+  console.log(data);
   callback(data, payload.person)
 }
 
