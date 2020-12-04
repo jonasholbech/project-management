@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import { store } from "../models/store.js";
-//import netlifyIdentity from 'netlify-identity-widget';
+import netlifyIdentity from 'netlify-identity-widget';
 import {assignToTask,unassignFromTask, toggleCompleted} from "../utils/tasks";
 import { BiTrash } from "react-icons/bi";
 import { Alert } from 'rsuite';
@@ -21,8 +21,10 @@ function filterPersons(persons, assigned){
 }
 export default function AssigneeForm({assigned, _id}){
     const { globalState,dispatch } = useContext(store);
+    const user = netlifyIdentity.currentUser();
     console.groupCollapsed("state and user");
     console.log({globalState});
+    console.log({user})
     console.groupEnd();
     const [assignedPersons, notAssignedPersons] = filterPersons(persons, assigned);
     const deleteClicked= async(e, person)=>{
@@ -31,7 +33,7 @@ export default function AssigneeForm({assigned, _id}){
             person,
             task:_id
         }
-        unassignFromTask(payload, (data, person)=>{
+        unassignFromTask(user, payload, (data, person)=>{
             Alert.success(`${person.name} was removed from the task`, alertDelay)
         });
         dispatch({
@@ -47,7 +49,7 @@ export default function AssigneeForm({assigned, _id}){
             task:_id,
             person:person
         }
-        assignToTask(payload, (data,person)=>{
+        assignToTask(user,payload, (data,person)=>{
             Alert.success(`${person.name} was assigned to the task`, alertDelay)
         })
         dispatch({
@@ -63,7 +65,7 @@ export default function AssigneeForm({assigned, _id}){
             _id
         }
         console.log(payload)
-        toggleCompleted(payload, (data,person)=>{
+        toggleCompleted(user, payload, (data,person)=>{
             Alert.success(`${person.name} ${payload.completed ? "completed":"un-completed"} the task`, alertDelay)
         })
         dispatch({

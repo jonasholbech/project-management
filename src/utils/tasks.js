@@ -1,5 +1,13 @@
-const getAllTasks = async (dispatch) => {
-  const response = await fetch("/api/get-all-tasks");
+const getAllTasks = async (user, dispatch) => {
+  const bearer = 'Bearer '+user.token.access_token;
+  const response = await fetch("/api/get-all-tasks",{
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
+  });
   const data = await response.json();
   dispatch({
     type: "SET_INITIAL_DATA",
@@ -7,9 +15,16 @@ const getAllTasks = async (dispatch) => {
   });  
 };
 
-const deleteTask = async(_id,dispatch)   => {
+const deleteTask = async(user,_id,dispatch)   => {
+  const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/delete-task", {
     method:"post",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({_id})
   });
   const data = await response.json();
@@ -23,10 +38,17 @@ const deleteTask = async(_id,dispatch)   => {
   }
 }
 
-const assignToTask = async(payload, callback) => {
+const assignToTask = async(user,payload, callback) => {
   console.log("async assignToTask");
+  const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/assign-to-task", {
     method:"post",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({_id:payload.task,assignee:payload.person})
   });
   const data = await response.json();
@@ -34,27 +56,48 @@ const assignToTask = async(payload, callback) => {
   callback(data, payload.person)
 }
 
-const unassignFromTask = async(payload,callback) => {
+const unassignFromTask = async(user,payload,callback) => {
+  const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/unassign-from-task", {
     method:"post",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({_id:payload.task,assignee:payload.person})
   });
   const data = await response.json();
   callback(data, payload.person)
 }
 
-const toggleCompleted = async(payload, callback) => {
+const toggleCompleted = async(user, payload, callback) => {
+  const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/toggle-completed", {
     method:"post",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(payload)
   });
   const data = await response.json();
   callback(data, payload.person)
 }
 
-const addTask = async(payload, callback) => {
+const addTask = async(user,payload, callback) => {
+  const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/add-task", {
     method:"post",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(payload)
   });
   const data = await response.json();
