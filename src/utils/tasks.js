@@ -50,4 +50,12 @@ const toggleCompleted = async(payload, callback) => {
   callback(data, payload.person)
 }
 
-export {getAllTasks, deleteTask,assignToTask, unassignFromTask, toggleCompleted};  
+const addTask = async(payload, callback) => {
+  const response = await fetch("/api/add-task", {
+    method:"post",
+    body: JSON.stringify(payload)
+  });
+  const data = await response.json();
+  callback(data)
+}
+export {getAllTasks, deleteTask,assignToTask, unassignFromTask, toggleCompleted, addTask};  

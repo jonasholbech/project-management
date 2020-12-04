@@ -36,6 +36,9 @@ const StateProvider = ({ children }) => {
       })
       return { ...state, tasks: nextTasks };
     }
+    if(action.type==="ADD_TASK"){
+      return {...state, tasks:state.tasks.concat(action.payload)}
+    }
     /* if (action.type === "SET_LANDS") {
       return { ...state, lands: action.payload };
     }

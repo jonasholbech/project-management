@@ -20,7 +20,7 @@ import 'rsuite/dist/styles/rsuite-default.css';
 import "./App.css";
 const Overview = React.lazy(()=>import("./components/Overview"));
 const Task = React.lazy(()=>import("./components/Task"));
-
+const AddTask = React.lazy(()=>import("./components/AddTask"));
 
 function App() {
   useEffect(()=>{
@@ -47,6 +47,7 @@ function App() {
                 <PrivateRoute path="/protected" component={Protected} />
                 <PrivateRoute exact path="/overview" component={Overview} />
                 <PrivateRoute path="/overview/:id" component={Task} />
+                <PrivateRoute path="/add-task" component={AddTask} />
               </Switch>
             </main>
           </Router>          
