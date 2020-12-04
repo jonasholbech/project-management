@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
 import { Button } from 'rsuite';
 import { StateProvider } from "./models/store.js";
-import Overview from "./components/Overview";
-import Task from "./components/Task";
+//import Overview from "./components/Overview";
+
+//import Task from "./components/Task";
 import Loader from "./components/Loader";
 
 import netlifyIdentity from 'netlify-identity-widget';
@@ -11,10 +12,15 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
+  Switch
 } from 'react-router-dom';
+
 import 'rsuite/dist/styles/rsuite-default.css';
 import "./App.css";
+const Overview = React.lazy(()=>import("./components/Overview"));
+const Task = React.lazy(()=>import("./components/Task"));
+
 
 function App() {
   useEffect(()=>{
@@ -25,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <StateProvider>
+        <React.Suspense fallback={<span>Waiting</span>}>
           <Router>
             <nav>
               <AuthButton />
@@ -33,13 +40,16 @@ function App() {
               <Link to="/overview">Overview</Link>
             </nav>
             <main>
-              <Route path="/public" component={Public} />
-              <Route path="/login" component={Login} />
-              <PrivateRoute path="/protected" component={Protected} />
-              <PrivateRoute exact path="/overview" component={Overview} />
-              <PrivateRoute path="/overview/:id" component={Task} />
+              <Switch>
+                <Route path="/public" component={Public} />
+                <Route path="/login" component={Login} />
+                <PrivateRoute path="/protected" component={Protected} />
+                <PrivateRoute exact path="/overview" component={Overview} />
+                <PrivateRoute path="/overview/:id" component={Task} />
+              </Switch>
             </main>
           </Router>          
+          </React.Suspense>
       </StateProvider>
     </div>
   );
