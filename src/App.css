@@ -139,3 +139,6 @@ label {
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+.Task .description {
+  white-space: pre-line;
+}

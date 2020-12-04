@@ -12,7 +12,7 @@ export default function Task(props){
     return <div className="Task">
         <p className="titleLabel">Task</p>
         <h1>{thisTask.title}</h1>
-        <section>{thisTask.description}</section>
+        <section className="description">{thisTask.description}</section>
         <AssigneeForm {...thisTask}/>
     </div>
 }
