@@ -1,4 +1,4 @@
-export const handler = async (req, _context) => {
+exports.handler  = async (req, _context) => {
     const body = JSON.parse(req.body)
     const eventType = body.event
     const user = body.user
