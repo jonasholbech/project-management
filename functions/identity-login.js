@@ -1,4 +1,4 @@
-const getInitials = require('./helpers/initials')
+const helpers = require('./helpers')
 exports.handler  = async (req, _context) => {
     const body = JSON.parse(req.body)
     const eventType = body.event
@@ -7,14 +7,7 @@ exports.handler  = async (req, _context) => {
     if (eventType === 'login') {
       console.log(`User: ${user.id} logged in`)
     }
-    const validateUser = (email) => {
-        const initials = getInitials(email);
-        if(['karc','fbe','kemm'].includes(initials)){
-            return ["coord"]; 
-        } else {
-            return ["teacher"];
-        }
-    }
+    
     
     /*
     const responseBody = { 
@@ -28,7 +21,7 @@ exports.handler  = async (req, _context) => {
     //roles are special (as they show up in netlify admin)
     const responseBody = { 
         app_metadata: { 
-            roles:validateUser(user.email)
+            roles:helpers.assignUser(user.email)
         }
     }; 
     return {

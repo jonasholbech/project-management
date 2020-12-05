@@ -1,5 +1,5 @@
 require("dotenv").config();
-const getInitials = require("./helpers/initials");
+//const getInitials = require("./helpers/initials");
 
 const ObjectId = require('mongodb').ObjectId; 
 
@@ -11,7 +11,7 @@ exports.handler = async function(event, context) {
             body: JSON.stringify({bugger:"off"})
         };
     }
-    const initialsFromToken = getInitials(user.email);
+    //const initialsFromToken = getInitials(user.email);
     /*
     user: {
   exp: 1606999824,
