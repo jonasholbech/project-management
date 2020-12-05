@@ -1,4 +1,4 @@
-const getInitials = require('./helpers/getInitials')
+const getInitials = require('./helpers/initials')
 exports.handler  = async (req, _context) => {
     const body = JSON.parse(req.body)
     const eventType = body.event
