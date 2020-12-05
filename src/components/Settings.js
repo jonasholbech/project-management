@@ -1,7 +1,10 @@
+import {useContext} from "react";
 import { Drawer, Button,Toggle } from 'rsuite';
-export default function Settings({show, setShowSettings}){
+import { store } from "../models/store.js";
+export default function Settings(){
+  const { globalState, dispatch } = useContext(store);
     return (
-        <Drawer className="Settings" show={show} onHide={()=>setShowSettings(false)}>
+        <Drawer className="Settings" show={globalState.showSettings} onHide={()=>dispatch({type:"TOGGLE_SETTINGS"})}>
           <Drawer.Header>
             <Drawer.Title>Settings</Drawer.Title>
           </Drawer.Header>
@@ -16,8 +19,8 @@ export default function Settings({show, setShowSettings}){
                 </fieldset>
           </Drawer.Body>
           <Drawer.Footer>
-            <Button onClick={()=>setShowSettings(false)} appearance="primary">Confirm</Button>
-            <Button onClick={()=>setShowSettings(false)} appearance="subtle">Cancel</Button>
+            <Button onClick={()=>dispatch({type:"TOGGLE_SETTINGS"})} appearance="primary">Confirm</Button>
+            <Button onClick={()=>dispatch({type:"TOGGLE_SETTINGS"})} appearance="subtle">Cancel</Button>
           </Drawer.Footer>
         </Drawer>
     )

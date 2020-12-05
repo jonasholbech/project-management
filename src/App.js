@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { Button } from 'rsuite';
 import { StateProvider } from "./models/store.js";
-//import Overview from "./components/Overview";
 
 //import Task from "./components/Task";
 import Loader from "./components/Loader";
@@ -10,7 +9,6 @@ import netlifyIdentity from 'netlify-identity-widget';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Redirect,
   withRouter,
   Switch
@@ -18,33 +16,21 @@ import {
 
 import 'rsuite/dist/styles/rsuite-default.css';
 import "./App.css";
+const Nav = React.lazy(()=>import("./components/Nav"));
 const Overview = React.lazy(()=>import("./components/Overview"));
 const Task = React.lazy(()=>import("./components/Task"));
 const AddTask = React.lazy(()=>import("./components/AddTask"));
 const Settings = React.lazy(()=>import("./components/Settings"));
 
 function App() {
-  const [showSettings, setShowSettings] = useState(false);
-  useEffect(()=>{
-    console.log(
-      Boolean(netlifyIdentity.currentUser())
-    )
-    },[])
   return (
     <div className="App">
       <StateProvider>
       
         <React.Suspense fallback={<span>Waiting</span>}>
-          <Settings show={showSettings} setShowSettings={setShowSettings}/>
+          <Settings />
           <Router>
-            <nav>
-              <AuthButton />
-              <Link to="/public">Public Page</Link>
-              <Link to="/protected">Protected</Link>
-              <Link to="/overview">Overview</Link>
-              <Link to="/add-task">Add Task</Link>
-              <Button appearance="link" onClick={()=>setShowSettings(!showSettings)}>Settings</Button>
-            </nav>
+            <Nav><AuthButton /></Nav>
             <main>
               <Switch>
                 <Route path="/public" component={Public} />
