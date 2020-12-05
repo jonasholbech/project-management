@@ -2,10 +2,10 @@ function getInitials(email){
     const parts = email.split("@");
     return parts[0];
 }
-const assignUser = (email) => {
+const assignUserToRoles = (email) => {
     const initials = getInitials(email);
     if(initials==="jofh"){
-        return ["teacher","admin"];
+        return ["teacher"];//"admin"
     } else if(['karc','fbe','kemm'].includes(initials)){
         return ["teacher","coord"]; 
     } else {
@@ -21,7 +21,7 @@ const checkUser = (user) => {
     }
 }
 module.exports = {
-    assignUser,
+    assignUserToRoles,
     checkUser,
     getInitials
 }

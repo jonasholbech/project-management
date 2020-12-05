@@ -3,7 +3,6 @@ exports.handler  = async (req, _context) => {
     const body = JSON.parse(req.body)
     const user = body.user
   
-    
     const validateUser = email => { 
         if (email.split("@")[1] === "kea.dk") { 
             return {
@@ -11,7 +10,7 @@ exports.handler  = async (req, _context) => {
                 body: JSON.stringify(
                     {
                         app_metadata: { 
-                            roles:helpers.assignUser(user.email)
+                            roles:helpers.assignUserToRoles(user.email)
                         }
                     }
                 )

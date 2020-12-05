@@ -3,6 +3,7 @@ import netlifyIdentity from 'netlify-identity-widget';
 import { Popover, Whisper, Button } from 'rsuite';
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import {deleteTask} from "../utils/tasks";
+import {canDeleteTask} from "../utils/helpers";
 import { store } from "../models/store.js";
 
 export default function SecondaryOptions(props){
@@ -12,7 +13,7 @@ export default function SecondaryOptions(props){
         <div className="SecondaryOptions">
             <Whisper placement="bottom" trigger="click" speaker={
                 <Popover title="Actions">
-                    <Button onClick={()=>{deleteTask(user,props._id, dispatch)}}>Delete</Button>
+                    {canDeleteTask(user,props.createdBy) && <Button onClick={()=>{deleteTask(user,props._id, dispatch)}}>Delete</Button>}
                 </Popover>}>
                     <BiDotsVerticalRounded/>
             </Whisper>

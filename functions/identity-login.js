@@ -21,7 +21,7 @@ exports.handler  = async (req, _context) => {
     //roles are special (as they show up in netlify admin)
     const responseBody = { 
         app_metadata: { 
-            roles:helpers.assignUser(user.email)
+            roles:helpers.assignUserToRoles(user.email)
         }
     }; 
     return {

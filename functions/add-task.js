@@ -13,7 +13,7 @@ exports.handler = async function(event, context) {
         title:body.title,
         dueAt: body.dueAt,
         addedAt:Date.now(),
-        assignedBy:user.getInitials(user.email),
+        createdBy:helpers.getInitials(user.email),
         description:body.description,
         assigned:[]
     }).then(({ ops }) => ops[0]);
