@@ -1,21 +1,22 @@
-const getInitials = require('./helpers/getInitials')
+
 exports.handler  = async (req, _context) => {
     const body = JSON.parse(req.body)
-    const eventType = body.event
     const user = body.user
   
-    if (eventType === 'login') {
-      console.log(`User: ${user.id} logged in`)
-    }
-    const validateUser = (email) => {
-        const initials = getInitials(email);
-        if(['karc','fbe','kemm'].includes(initials)){
-            return ["coord"]; 
-        } else {
-            return ["teacher"];
+    const validateUser = email => { 
+        if (email.split("@")[1] === "kea.dk") { 
+            return {
+                statusCode: 200,
+                body: JSON.stringify({all:"good"})
+            };
+        } else { 
+            return {
+                statusCode: 403,
+                body: JSON.stringify({bugger:"off"})
+            };
         }
-    }
-    
+    }; 
+    return validateUser(user.email);
     /*
     const responseBody = { 
         app_metadata: { 
@@ -26,15 +27,8 @@ exports.handler  = async (req, _context) => {
     }; */
     //basically, i can attach anything to app_metadata and user_metadata, but
     //roles are special (as they show up in netlify admin)
-    const responseBody = { 
-        app_metadata: { 
-            roles:validateUser(user.email)
-        }
-    }; 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(responseBody)
-    };
+    
+    
   }
   /*
 exports.handler = function(event, context) { 
