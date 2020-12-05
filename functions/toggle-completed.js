@@ -1,16 +1,11 @@
 require("dotenv").config();
-//const getInitials = require("./helpers/initials");
+const helpers = require("./helpers");
 
 const ObjectId = require('mongodb').ObjectId; 
 
 exports.handler = async function(event, context) {
     const {user} = context.clientContext;
-    if(!user){
-        return {
-            statusCode: 403,
-            body: JSON.stringify({bugger:"off"})
-        };
-    }
+    helpers.checkUser(user);
     //const initialsFromToken = getInitials(user.email);
     /*
     user: {

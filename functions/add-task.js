@@ -1,5 +1,9 @@
 require("dotenv").config();
+const helpers = require("./helpers");
 exports.handler = async function(event, context) {
+    const {user} = context.clientContext;
+    helpers.checkUser(user);
+
     const MongoClient = require('mongodb').MongoClient;
     const uri = process.env.MONGO_ATLAS_KEY;
     const client = await MongoClient.connect(uri, { useUnifiedTopology: true,useNewUrlParser: true });
@@ -9,10 +13,10 @@ exports.handler = async function(event, context) {
         title:body.title,
         dueAt: body.dueAt,
         addedAt:Date.now(),
+        assignedBy:user.getInitials(user.email),
         description:body.description,
         assigned:[]
     }).then(({ ops }) => ops[0]);
-    console.log(task)
     client.close();
     return {
         statusCode: 200,

@@ -12,6 +12,16 @@ const assignUser = (email) => {
         return ["teacher"];
     }
 }
+const checkUser = (user) => {
+    if(!user){
+        return {
+            statusCode: 403,
+            body: JSON.stringify({bugger:"off"})
+        };
+    }
+}
 module.exports = {
-    assignUser
+    assignUser,
+    checkUser,
+    getInitials
 }

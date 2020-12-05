@@ -1,7 +1,10 @@
 require("dotenv").config();
+const helpers = require("./helpers");
 const ObjectId = require('mongodb').ObjectId; 
 
 exports.handler = async function(event, context) {
+    const {user} = context.clientContext;
+    helpers.checkUser(user);
     const MongoClient = require('mongodb').MongoClient;
     const uri = process.env.MONGO_ATLAS_KEY;
     const client = await MongoClient.connect(uri, { useUnifiedTopology: true,useNewUrlParser: true });
