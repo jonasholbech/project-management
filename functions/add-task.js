@@ -1,3 +1,4 @@
+//user stuff done and checked
 require("dotenv").config();
 const helpers = require("./helpers");
 exports.handler = async function(event, context) {

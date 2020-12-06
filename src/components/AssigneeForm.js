@@ -50,8 +50,10 @@ export default function AssigneeForm({assigned, _id}){
             person:person
         }
         assignToTask(user,payload, (data,person)=>{
+            console.log("alert called")
             Alert.success(`${person.name} was assigned to the task`, alertDelay)
         })
+        console.log("calling dispatch")
         dispatch({
             type:"ASSIGN_TO_TASK",
             payload
@@ -68,6 +70,7 @@ export default function AssigneeForm({assigned, _id}){
         toggleCompleted(user, payload, (data,person)=>{
             Alert.success(`${person.name} ${payload.completed ? "completed":"un-completed"} the task`, alertDelay)
         })
+        
         dispatch({
             type:"TOGGLE_COMPLETED",
             payload

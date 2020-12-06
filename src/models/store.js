@@ -2,8 +2,7 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  tasks: [
-  ],
+  tasks: [],
   loaded:false,
   showSettings:false
 };
@@ -23,17 +22,20 @@ const StateProvider = ({ children }) => {
       return { ...state, tasks: nextTasks };
     }
     if(action.type === "ASSIGN_TO_TASK"){
-      console.log("ASSIGN_TO_TASK", action.payload)
+      console.log("ASSIGN_TO_TASK", action.payload, state.tasks, action.payload.task)
       const nextTasks = state.tasks.map(task=>{
+        //sometimes executed twice, probably due to: https://stackoverflow.com/questions/55055793/react-usereducer-hook-fires-twice-how-to-pass-props-to-reducer 
         if(task._id===action.payload.task){
-          console.log("FOUND _ID")
-          task.assigned=task.assigned.concat({...action.payload.person, completed:false})
+          if(task.assigned.filter(e=>e.initials === action.payload.person.initials).length===0){
+            task.assigned=[...task.assigned].concat({...action.payload.person, completed:false})
+          }
         }
         return task;
       })
       return { ...state, tasks: nextTasks };
     }
     if(action.type==="UNASSIGN_FROM_TASK"){
+      console.log("UNASSIGN_FROM_TASK")
       const nextTasks = state.tasks.map(task=>{
         if(task._id===action.payload.task){
           task.assigned = [...task.assigned].filter(person=>person.initials!==action.payload.person.initials);
