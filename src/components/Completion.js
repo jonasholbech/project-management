@@ -1,7 +1,6 @@
 import {useState} from "react";
 
 export default function Completion({assigned}){
-    console.log(assigned)
     const [showDetails, setShowDetails] = useState(false);
     
     const total = assigned.length;

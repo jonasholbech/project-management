@@ -142,3 +142,6 @@ label {
 .Task .description {
   white-space: pre-line;
 }
+.TaskRow.timeExceeded {
+  background: rgb(255, 186, 186);
+}

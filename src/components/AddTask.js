@@ -6,6 +6,7 @@ import {addTask} from "../utils/tasks";
 import {alertDelay} from "../models/settings";
 
 export default function AddTask(props){
+    
     const { dispatch,globalState } = useContext(store);
     const user = netlifyIdentity.currentUser();
     console.groupCollapsed("state and user");

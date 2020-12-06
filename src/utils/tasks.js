@@ -15,9 +15,29 @@ const getAllTasks = async (user, dispatch) => {
   });  
 };
 
-const deleteTask = async(user,_id,dispatch)   => {
+const deleteTask = async(user,_id,callback)   => {
   const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/delete-task", {
+    method:"post",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': bearer,    
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({_id})
+  });
+  const data = await response.json();
+  if(data.deletedCount>0){
+    callback(data)
+  } else {
+    console.error("SOMETHING BAD HAPPENED")
+  }
+}
+
+const closeTask = async(user,_id,dispatch)   => {
+  const bearer = 'Bearer '+user.token.access_token;
+  const response = await fetch("/api/close-task", {
     method:"post",
     withCredentials: true,
     credentials: 'include',
@@ -103,4 +123,4 @@ const addTask = async(user,payload, callback) => {
   const data = await response.json();
   callback(data)
 }
-export {getAllTasks, deleteTask,assignToTask, unassignFromTask, toggleCompleted, addTask};  
+export {getAllTasks, deleteTask,assignToTask, unassignFromTask, toggleCompleted, addTask, closeTask};  

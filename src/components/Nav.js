@@ -1,4 +1,5 @@
 import React, {useContext} from "react";
+//import netlifyIdentity from 'netlify-identity-widget';
 import { Button } from 'rsuite';
 import { store } from "../models/store.js";
 
@@ -8,6 +9,7 @@ import {
 
 export default function Nav(props) {
   const { dispatch } = useContext(store);
+  //const user = netlifyIdentity.currentUser();
   return (<nav>
     {props.children}
     <Link to="/public">Public Page</Link>
