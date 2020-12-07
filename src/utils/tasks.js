@@ -1,14 +1,19 @@
 const getAllTasks = async (user, dispatch) => {
   const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/get-all-tasks",{
+    method:"POST",
     withCredentials: true,
     credentials: 'include',
     headers: {
       'Authorization': bearer,    
       'Content-Type': 'application/json'
     },
+    //body:JSON.stringify({email:user.email})
+    //TODO: ovenstående virker, men så kan man ikke se tasks (heller ikke dem man lige har lavet, der skal tænkes over flowet)
+    body:JSON.stringify({})
   });
   const data = await response.json();
+  
   dispatch({
     type: "SET_INITIAL_DATA",
     payload: data,

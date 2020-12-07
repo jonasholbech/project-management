@@ -16,7 +16,7 @@ const checkUser = (user) => {
     if(!user){
         return {
             statusCode: 403,
-            body: JSON.stringify({bugger:"off"})
+            body: JSON.stringify({"bugger":"off"})
         };
     }
 }
