@@ -1,8 +1,10 @@
 # TODO
-
+- hvem kan assigne?
+  - admins, coords, createdBy
+- Hvem kan ænre assigned status
+  - admins, coords, createdBy, assignee
 - View own tasks
 - admin mode
-- assignedby in db
 - settings
   - toggles buttons do nothing for now
   - https://rsuitejs.com/components/toggle/
@@ -19,11 +21,16 @@
   
   - use initials as key in cloud functions
 
-- move completed task to other collection
+
 - filters on overview
 - hide settings unless logged in
 - show login button directly on frontpage
 - hide nav items when not logged in
 - from AddTask: redirect to newly created task
+- https://css-tricks.com/netlify-functions-for-sending-emails/
+  - I guess I need to store user data in mongo as well
+  - https://www.w3schools.com/nodejs/nodejs_email.asp
 # Completed, could be improved
 - set roles on signup/ and/or possibly login/validate
+- move completed task to other collection
+- createdby in db

@@ -3,7 +3,13 @@
 *:before {
   box-sizing: border-box;
 }
-
+main {
+  display: grid;
+  grid-template-columns: 1fr 800px 1fr;
+}
+main > * {
+  grid-column: 2/-2;
+}
 nav {
   display: flex;
   align-items: center;
@@ -99,14 +105,6 @@ button:active {
   background: lightblue;
 }
 
-main {
-  display: grid;
-  grid-template-columns: 1fr 800px 1fr;
-}
-main > * {
-  grid-column: 2/-2;
-}
-
 .AssigneeForm {
   display: flex;
   flex-wrap: wrap;
@@ -141,4 +139,6 @@ label {
 }
 .Task .description {
   white-space: pre-line;
+}
+.TaskRow.timeExceeded {
 }
