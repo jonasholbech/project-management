@@ -142,3 +142,13 @@ label {
 }
 .TaskRow.timeExceeded {
 }
+
+.Overview header p {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Overview header {
+  margin: 1rem 0;
+}

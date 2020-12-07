@@ -1,5 +1,6 @@
 require("dotenv").config();
 const helpers = require("./helpers");
+
 exports.handler = async function(event, context) {
     const {user} = context.clientContext;
     helpers.checkUser(user);
@@ -8,8 +9,17 @@ exports.handler = async function(event, context) {
     const client = await MongoClient.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
     const db = client.db("project-m-database");
     const body = JSON.parse(event.body);
-    
-    const filter = body.email ? {"assigned.initials":helpers.getInitials(body.email)}: {};
+    const setFilter = () =>{
+        switch(body.type){
+            case "assignedTo":
+                return {"assigned.initials":helpers.getInitials(body.email)}
+            case "createdBy":
+                return {"createdBy":helpers.getInitials(body.email)}
+            default:
+                return {}
+        }
+    }    
+    const filter = setFilter();
     const all = await db.collection('tasks').find(filter).toArray();
     
     /* await db.collection("tasks").insertOne({

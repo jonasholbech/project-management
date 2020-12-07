@@ -11,6 +11,7 @@ const { Provider } = store;
 
 const StateProvider = ({ children }) => {
   const [globalState, dispatch] = useReducer((state = initialState, action) => {
+    
     if(action.type==="TOGGLE_SETTINGS"){
       return {...state, showSettings:!state.showSettings}
     }
