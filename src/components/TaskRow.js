@@ -2,6 +2,7 @@ import Completion from "./Completion";
 import SecondaryOptions from "./SecondaryOptions";
 import {Link} from 'react-router-dom';
 
+import { BiTimer } from "react-icons/bi";
 export default function TaskRow(props){
     function pad(num){
         return String(num).padStart(2,'0');
@@ -16,7 +17,7 @@ export default function TaskRow(props){
             <td><Link to={`/overview/${props._id}`}>{props.title}</Link></td>
             <td>{added}</td>
             <td>{props.description.substring(0,20)}...</td>
-            <td>{due}</td>
+            <td>{due} {props.dueAt < now ? <BiTimer />:null}</td>
             <td className="progress"><Completion assigned={props.assigned}/></td>
             <td className="actions"><SecondaryOptions createdBy={props.createdBy} assigned={props.assigned} _id={props._id}/>
             </td>

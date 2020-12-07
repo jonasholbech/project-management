@@ -35,7 +35,7 @@ const deleteTask = async(user,_id,callback)   => {
   }
 }
 
-const closeTask = async(user,_id,dispatch)   => {
+const closeTask = async(user, _id, callback)   => {
   const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/close-task", {
     method:"post",
@@ -48,11 +48,9 @@ const closeTask = async(user,_id,dispatch)   => {
     body: JSON.stringify({_id})
   });
   const data = await response.json();
-  if(data.deletedCount>0){
-    dispatch({
-      type: "TASK_DELETED",
-      payload: _id,
-    });
+  console.log(data)
+  if(data.insertedCount>0){
+    callback(data);
   } else {
     console.error("SOMETHING BAD HAPPENED")
   }

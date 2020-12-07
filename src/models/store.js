@@ -17,10 +17,11 @@ const StateProvider = ({ children }) => {
     if(action.type==="SET_INITIAL_DATA"){
       return { ...state, tasks: action.payload, loaded:true };
     }
-    if(action.type === "TASK_DELETED"){
+    if(action.type === "TASK_DELETED" || action.type==="TASK_CLOSED"){
       const nextTasks = state.tasks.filter(t=>t._id!==action.payload);
       return { ...state, tasks: nextTasks };
     }
+    
     if(action.type === "ASSIGN_TO_TASK"){
       console.log("ASSIGN_TO_TASK", action.payload, state.tasks, action.payload.task)
       const nextTasks = state.tasks.map(task=>{

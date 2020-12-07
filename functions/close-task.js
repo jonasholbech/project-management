@@ -12,7 +12,14 @@ exports.handler = async function(event, context) {
     const db = client.db("project-m-database");    
     const body = JSON.parse(event.body);
     const o_id = ObjectId(body._id);
-    const all = await db.collection('tasks').deleteOne( {"_id": o_id});
+    //documentsToMove = SourceCollection.find();
+    const all = await db.collection('tasks').find({"_id":o_id}).toArray();
+    //DestinationCollection.insertMany(documentsToMove);
+    const inserted = await db.collection("completed").insertMany(all);
+    //SourceCollection.deleteMany(documentsToMove);
+    const deleted = await db.collection("tasks").deleteOne( {"_id": o_id});
+
+    //const all = await db.collection('tasks').deleteOne( {"_id": o_id});
     //const all = await db.collection('tasks').findOneAndDelete({_id:o_id}) 
     /*var id = req.params.gonderi_id;       
 var o_id = new ObjectId(id);
@@ -24,6 +31,6 @@ db.test.find({_id:o_id})
     client.close();
     return {
         statusCode: 200,
-        body: JSON.stringify(all)
+        body: JSON.stringify(inserted)
     };
 }

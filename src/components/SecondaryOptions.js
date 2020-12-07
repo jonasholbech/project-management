@@ -21,8 +21,15 @@ export default function SecondaryOptions(props){
             payload: props._id,
           });
     };
-    const closeTaskClicked = () => {
-        closeTask(user,props._id)
+    const closeTaskClicked = (e) => {
+        e.preventDefault();
+        closeTask(user,props._id, (data)=>{
+            Alert.success(`The task was closed`, alertDelay)
+        });
+        dispatch({
+            type: "TASK_CLOSED",
+            payload: props._id,
+          });
     };
     return (
         <div className="SecondaryOptions">
