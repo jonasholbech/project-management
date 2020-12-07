@@ -20,8 +20,7 @@
   - https://docs.netlify.com/functions/functions-and-identity/#trigger-serverless-functions-on-identity-events
   
   - use initials as key in cloud functions
-
-
+ - pagination på overview
 - filters on overview
 - hide settings unless logged in
 - show login button directly on frontpage

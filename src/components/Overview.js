@@ -4,16 +4,24 @@ import React, { useContext } from "react";
 import { store } from "../models/store.js";
 import netlifyIdentity from 'netlify-identity-widget';
 
+import {useState} from "react";
 import TaskRow from "./TaskRow";
+import { Toggle } from 'rsuite';
+
 export default function Overview(props){
+    const [individual, setIndividual] = useState(false);
     const { globalState } = useContext(store);
     const user = netlifyIdentity.currentUser();
     console.groupCollapsed("state and user");
     console.log({user})
     console.log({globalState});
     console.groupEnd();
-    
+    const toggleIndividual=e=>{
+        
+    }
     return (
+        <>
+        <p>Show only my tasks <Toggle defaultChecked={individual} onChange={toggleIndividual} /></p>
         <table>
             <thead>
                 <tr>
@@ -31,5 +39,6 @@ export default function Overview(props){
             )}
             </tbody>
         </table>
+        </>
     )
 }

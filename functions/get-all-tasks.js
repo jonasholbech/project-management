@@ -5,7 +5,7 @@ exports.handler = async function(event, context) {
     helpers.checkUser(user);
     const MongoClient = require('mongodb').MongoClient;
     const uri = process.env.MONGO_ATLAS_KEY;
-    const client = await MongoClient.connect(uri, { useUnifiedTopology: true,useNewUrlParser: true });
+    const client = await MongoClient.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
     const db = client.db("project-m-database");
     const body = JSON.parse(event.body);
     
