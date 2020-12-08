@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import netlifyIdentity from 'netlify-identity-widget';
 import { store } from "../models/store.js";
 import {getAllTasks, getAllTasksForUser, getAllTasksByUser} from "../utils/tasks";
-
+//TODO: I think the loader makes stuff load twice (since overview already loads)
 const Loader = (props) => {
   const { globalState, dispatch } = useContext(store);
   const user = netlifyIdentity.currentUser();

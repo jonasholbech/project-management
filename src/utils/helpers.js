@@ -10,3 +10,6 @@ export function canDeleteTask(user, createdBy){
     }
     return false;
 }
+export function canAssign(user, createdBy){
+    return canDeleteTask(user, createdBy);
+}

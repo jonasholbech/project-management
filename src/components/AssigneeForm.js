@@ -5,6 +5,8 @@ import {assignToTask,unassignFromTask, toggleCompleted} from "../utils/tasks";
 import { BiTrash } from "react-icons/bi";
 import { Alert } from 'rsuite';
 import {alertDelay, persons} from "../models/settings";
+import {canAssign} from "../utils/helpers";
+
 function filterPersons(persons, assigned){
     const assignedPersons=[];
     const notAssignedPersons=[];
@@ -19,7 +21,7 @@ function filterPersons(persons, assigned){
     })
     return [assignedPersons, notAssignedPersons];
 }
-export default function AssigneeForm({assigned, _id}){
+export default function AssigneeForm({assigned, _id, createdBy}){
     const { globalState,dispatch } = useContext(store);
     const user = netlifyIdentity.currentUser();
     console.groupCollapsed("state and user");
@@ -124,7 +126,7 @@ export default function AssigneeForm({assigned, _id}){
                 return (
                     <tr key={person.initials}>
                         <td>{person.name}</td>
-                        <td className="center"><input onClick={()=>assignToTaskClicked(person)} name="assigned" value={person.initials} type="checkbox" /></td>
+                        <td className="center"><input disabled={!canAssign(user, createdBy)} onClick={()=>assignToTaskClicked(person)} name="assigned" value={person.initials} type="checkbox" /></td>
                     </tr>
                 )
             })}
