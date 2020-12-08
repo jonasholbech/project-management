@@ -4,7 +4,7 @@ import { store } from "../models/store.js";
 export default function Settings(){
   const { globalState, dispatch } = useContext(store);
     return (
-        <Drawer className="Settings" show={globalState.showSettings} onHide={()=>dispatch({type:"TOGGLE_SETTINGS"})}>
+        <Drawer size="xs" className="Settings" show={globalState.showSettings} onHide={()=>dispatch({type:"TOGGLE_SETTINGS"})}>
           <Drawer.Header>
             <Drawer.Title>Settings</Drawer.Title>
           </Drawer.Header>

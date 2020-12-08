@@ -10,7 +10,6 @@ import TaskRow from "./TaskRow";
 
 export default function Overview(props){
     const [loading, setLoading] = useState(false);
-    const [buttonStates, setButtonStates] = useState(["primary", "ghost", "ghost"]);
     const { globalState, dispatch } = useContext(store);
     const user = netlifyIdentity.currentUser();
     console.groupCollapsed("state and user");
@@ -19,17 +18,17 @@ export default function Overview(props){
     console.groupEnd();
     const all=(e)=>{
         setLoading(true);
-        setButtonStates(["primary", "ghost", "ghost"])
+        dispatch({type:"SET_OVERVIEW_FILTER", payload:"all"})
         getAllTasks(user,dispatch, ()=>setLoading(false));
     }
     const assignedTo=(e)=>{
+        dispatch({type:"SET_OVERVIEW_FILTER", payload:"assignedTo"})
         setLoading(true);
-        setButtonStates(["ghost","ghost", "primary"])
         getAllTasksForUser(user,dispatch, ()=>setLoading(false));
     }
     const createdBy=(e)=>{
         setLoading(true);
-        setButtonStates(["ghost", "primary","ghost"])
+        dispatch({type:"SET_OVERVIEW_FILTER", payload:"createdBy"})
         getAllTasksByUser(user,dispatch, ()=>setLoading(false));
     }
     
@@ -38,9 +37,9 @@ export default function Overview(props){
             <header>
                   <ButtonToolbar>
                     <ButtonGroup>
-                        <Button onClick={all} appearance={buttonStates[0]}>All</Button>
-                        <Button onClick={createdBy}  appearance={buttonStates[1]}>Created</Button>
-                        <Button onClick={assignedTo} appearance={buttonStates[2]}>Assigned</Button>
+                        <Button onClick={all} appearance={globalState.overviewFilter==="all" ? "primary":"ghost"}>All</Button>
+                        <Button onClick={createdBy}  appearance={globalState.overviewFilter==="createdBy" ? "primary":"ghost"}>Created</Button>
+                        <Button onClick={assignedTo} appearance={globalState.overviewFilter==="assignedTo" ? "primary":"ghost"}>Assigned</Button>
                     </ButtonGroup>
                 </ButtonToolbar>
             </header>

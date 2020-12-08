@@ -15,13 +15,13 @@
   - ... if more than x chars, otherwise full
 - markdown (or at least line breaks) in description
   - https://gist.github.com/yidas/41cc9272d3dff50f3c9560fb05e7255e
-
+- load tasks, skal ske i overview, og ved hvert refresh
+  - skal refreshe hvert x sekund eller hver gang den besøges
 - auth: 
   - https://docs.netlify.com/functions/functions-and-identity/#trigger-serverless-functions-on-identity-events
   
   - use initials as key in cloud functions
  - pagination på overview
-- filters on overview
 - hide settings unless logged in
 - show login button directly on frontpage
 - hide nav items when not logged in
@@ -29,6 +29,8 @@
 - https://css-tricks.com/netlify-functions-for-sending-emails/
   - I guess I need to store user data in mongo as well
   - https://www.w3schools.com/nodejs/nodejs_email.asp
+- assignedBy?
+- cookie notification
 # Completed, could be improved
 - set roles on signup/ and/or possibly login/validate
 - move completed task to other collection

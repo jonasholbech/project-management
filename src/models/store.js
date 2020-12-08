@@ -4,14 +4,17 @@ import React, { createContext, useReducer } from "react";
 const initialState = {
   tasks: [],
   loaded:false,
-  showSettings:false
+  showSettings:false,
+  overviewFilter:'assignedTo'
 };
 const store = createContext(initialState);
 const { Provider } = store;
 
 const StateProvider = ({ children }) => {
   const [globalState, dispatch] = useReducer((state = initialState, action) => {
-    
+    if(action.type==="SET_OVERVIEW_FILTER"){
+      return {...state, overviewFilter:action.payload}
+    }
     if(action.type==="TOGGLE_SETTINGS"){
       return {...state, showSettings:!state.showSettings}
     }

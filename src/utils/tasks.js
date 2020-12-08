@@ -1,4 +1,4 @@
-const getAllTasks = async (user, dispatch, callback=null) => {
+const getAllTasks = async (user, dispatch, callback=()=>{}) => {
   const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/get-all-tasks",{
     method:"POST",
@@ -16,12 +16,12 @@ const getAllTasks = async (user, dispatch, callback=null) => {
     type: "SET_INITIAL_DATA",
     payload: data,
   });  
-  if(callback){
+  
     callback();
-  }
+  
 };
 //TODO: de næste to funktion skal have et foot print a la assign to task
-const getAllTasksForUser = async (user, dispatch,callback) => {
+const getAllTasksForUser = async (user, dispatch,callback=()=>{}) => {
   const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/get-all-tasks",{
     method:"POST",
@@ -41,7 +41,7 @@ const getAllTasksForUser = async (user, dispatch,callback) => {
   });  
   callback();
 };
-const getAllTasksByUser = async (user, dispatch, callback) => {
+const getAllTasksByUser = async (user, dispatch, callback=()=>{}) => {
   const bearer = 'Bearer '+user.token.access_token;
   const response = await fetch("/api/get-all-tasks",{
     method:"POST",
