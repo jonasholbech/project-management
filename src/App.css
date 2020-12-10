@@ -113,7 +113,10 @@ button:active {
 .AssigneeForm button:hover {
   cursor: pointer;
 }
-.AssigneeForm button:hover svg {
+.AssigneeForm button:hover:disabled {
+  cursor: not-allowed;
+}
+.AssigneeForm button:hover:not(:disabled) svg {
   fill: crimson;
 }
 .AssigneeForm button {

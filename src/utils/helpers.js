@@ -13,3 +13,6 @@ export function canDeleteTask(user, createdBy){
 export function canAssign(user, createdBy){
     return canDeleteTask(user, createdBy);
 }
+export function isAssignee(user, person, createdBy){
+    return canDeleteTask(user, createdBy) || getInitials(user.email)===person.initials;
+}

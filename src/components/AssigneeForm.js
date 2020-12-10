@@ -5,7 +5,7 @@ import {assignToTask,unassignFromTask, toggleCompleted} from "../utils/tasks";
 import { BiTrash } from "react-icons/bi";
 import { Alert } from 'rsuite';
 import {alertDelay, persons} from "../models/settings";
-import {canAssign} from "../utils/helpers";
+import {canAssign, isAssignee} from "../utils/helpers";
 
 function filterPersons(persons, assigned){
     const assignedPersons=[];
@@ -102,9 +102,9 @@ export default function AssigneeForm({assigned, _id, createdBy}){
                 return (
                     <tr key={person.initials}>
                         <td>{person.name}</td>
-                        <td className="center"><button onClick={(e)=>{deleteClicked(e, person)}}><BiTrash/></button></td>
-                        <td className="center"><input type="radio" value={true} onChange={(e)=>setCompleted(e, person)} name={`completed[${person.initials}]`} defaultChecked={completed} /></td>
-                        <td className="center"><input type="radio" value={false} onChange={(e)=>setCompleted(e, person)} name={`completed[${person.initials}]`} defaultChecked={notCompleted}/></td>
+                        <td className="center"><button disabled={!canAssign(user,createdBy)} onClick={(e)=>{deleteClicked(e, person)}}><BiTrash/></button></td>
+                        <td className="center"><input  disabled={!isAssignee(user, person, createdBy)} type="radio" value={true} onChange={(e)=>setCompleted(e, person)} name={`completed[${person.initials}]`} defaultChecked={completed} /></td>
+                        <td className="center"><input  disabled={!isAssignee(user, person, createdBy)} type="radio" value={false} onChange={(e)=>setCompleted(e, person)} name={`completed[${person.initials}]`} defaultChecked={notCompleted}/></td>
                     </tr>
                 )
             })}

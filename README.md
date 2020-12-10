@@ -1,9 +1,5 @@
 # TODO
-- hvem kan assigne?
-  - admins, coords, createdBy
-- Hvem kan ænre assigned status
-  - admins, coords, createdBy, assignee
-- View own tasks
+- when refreshing/visting directly a task, the task is not loaded unless the original filter (store) matches!
 - admin mode
 - settings
   - toggles buttons do nothing for now

@@ -7,6 +7,7 @@ const Loader = (props) => {
   const { globalState, dispatch } = useContext(store);
   const user = netlifyIdentity.currentUser();
   useEffect(()=>{
+
     switch(globalState.overviewFilter){
       case "createdBy":
         getAllTasksByUser(user, dispatch);
